@@ -1,0 +1,57 @@
+html {
+    overflow-y: hidden;
+}
+
+body {
+    text-align: center;
+    font-family: Arial;
+    background-color: #2C2F33;
+    color: aliceblue;
+}
+
+/* https://philipwalton.github.io/solved-by-flexbox/demos/vertical-centering/ */
+.aligner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.aligner-item {
+    max-width: 80%;
+}
+
+.topline {
+    color: beige;
+    font-size: 300%;
+}
+
+.temp {
+    color: firebrick;
+    font-size: 1000%;
+}
+
+.unit-picker {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.tagline {
+    color: beige;
+    font-size: 200%;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    position: relative;
+}
+
+.temp-unit {
+    margin: 1px;
+    text-align: center;
+    display: inline-block;
+}
