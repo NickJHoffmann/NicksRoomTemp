@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Nick's Room Temperature</title>
     <link href="styles.css" rel="stylesheet">
 </head>
@@ -15,16 +16,16 @@
     </div>
     <div class="unit-picker">
         <div id="degF" class="temp-unit" onclick=setToF()>°F</div>
-        <div class="temp-unit"> | </div>
+        <div class="temp-unit" style="cursor: default"> | </div>
         <div id="degC" class="temp-unit" onclick=setToC()>°C</div>
     </div>
     <script type="text/javascript">
         tempUnit = "F";
         document.getElementById("degF").style.fontWeight = 'bold';
         function setTemp() {
-                temp = Math.floor(Math.random() * 100);
-                //data = require("./temperature.json");
-                //temp = data[tempUnit];
+            temp = Math.floor(Math.random() * 100);
+            //data = require("./temperature.json");
+            //temp = data[tempUnit];
                 document.getElementById("tempDisplay").innerHTML = `${temp} °${tempUnit}`;
                 if (temp >= 71) {
                     text = "He's probably a little toasty";
