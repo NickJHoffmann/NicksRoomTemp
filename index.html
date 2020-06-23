@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <meta name="viewport">
     <title>Nick's Room Temperature</title>
     <link href="styles.css" rel="stylesheet">
 </head>
-<body onload="start()">
+<body onload="startListening()">
     <div class="aligner">
         <div class="aligner-item">
             <h1 class="topline">Nick's room is currently</h1>
@@ -19,17 +19,30 @@
         <div class="temp-unit" style="cursor: default"> | </div>
         <div id="degC" class="temp-unit" onclick=setToC()>°C</div>
     </div>
-    <script type="text/javascript">
+
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-auth.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBcxcaIxv1swCE4IVy9KQS0tkLE8N_v2jk",
+            authDomain: "nick-s-room-temperature.firebaseapp.com",
+            databaseURL: "https://nick-s-room-temperature.firebaseio.com",
+            storageBucket: "nick-s-room-temperature.appspot.com",
+        };
+        firebase.initializeApp(firebaseConfig);
+        database = firebase.database();
+        latestData = {};
         tempUnit = "F";
         document.getElementById("degF").style.fontWeight = 'bold';
         function setTemp() {
-            temp = Math.floor(Math.random() * 100);
-            //data = require("./temperature.json");
-            //temp = data[tempUnit];
+            temp = latestData[tempUnit];
                 document.getElementById("tempDisplay").innerHTML = `${temp} °${tempUnit}`;
-                if (temp >= 71) {
+                if (latestData["F"] >= 78) {
+                    text = "He's probably real fuckin hot";
+                } else if (latestData["F"] < 78 && latestData["F"] >= 71) {
                     text = "He's probably a little toasty";
-                } else if (temp < 71 && temp >= 65) {
+                } else if (latestData["F"] < 71 && latestData["F"] >= 65) {
                     text = "He's probably feeling good";
                 } else {
                     text = "He's probably a tad bit cold";
@@ -37,23 +50,27 @@
                 document.getElementById("tagline").innerHTML = text;
         }
 
-        function start() {
-            setInterval(setTemp, 1000);
+        function startListening() {
+            database.ref().on("value", function(snapshot) {
+                latestData = snapshot.val();
+                setTemp(latestData);
+            })
         }
 
         function setToF() {
             tempUnit = "F";
-            document.getElementById("tempDisplay").innerHTML = `${temp} °${tempUnit}`;
             document.getElementById("degF").style.fontWeight = 'bold';
             document.getElementById("degC").style.fontWeight = 'normal';
+            setTemp();
         }
 
         function setToC() {
             tempUnit = "C";
-            document.getElementById("tempDisplay").innerHTML = `${temp} °${tempUnit}`;
             document.getElementById("degC").style.fontWeight = 'bold';
             document.getElementById("degF").style.fontWeight = 'normal';
+            setTemp();
         }
+
     </script>
 </body>
 </html>
