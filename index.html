@@ -37,17 +37,18 @@
         document.getElementById("degF").style.fontWeight = 'bold';
         function setTemp() {
             temp = latestData[tempUnit];
-                document.getElementById("tempDisplay").innerHTML = `${temp} °${tempUnit}`;
-                if (latestData["F"] >= 78) {
-                    text = "He's probably real fuckin hot";
-                } else if (latestData["F"] < 78 && latestData["F"] >= 71) {
-                    text = "He's probably a little toasty";
-                } else if (latestData["F"] < 71 && latestData["F"] >= 65) {
-                    text = "He's probably feeling good";
-                } else {
-                    text = "He's probably a tad bit cold";
-                }
-                document.getElementById("tagline").innerHTML = text;
+            document.getElementById("tempDisplay").innerHTML = `${temp} °${tempUnit}`;
+            let testTemp = latestData["F"];
+            if (testTemp >= 85) {
+                text = "Send help";
+            } else if (testTemp >= 75) {
+                text = "He's probably a little toasty";
+            } else if (testTemp >= 65) {
+                text = "He's probably feeling good";
+            } else {
+                text = "He's probably a tad bit cold";
+            }
+            document.getElementById("tagline").innerHTML = text;
         }
 
         function startListening() {
