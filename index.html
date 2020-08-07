@@ -24,24 +24,25 @@
     <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-auth.js"></script>
     <script>
-        var firebaseConfig = {
+        const firebaseConfig = {
             apiKey: "AIzaSyBcxcaIxv1swCE4IVy9KQS0tkLE8N_v2jk",
             authDomain: "nick-s-room-temperature.firebaseapp.com",
             databaseURL: "https://nick-s-room-temperature.firebaseio.com",
             storageBucket: "nick-s-room-temperature.appspot.com",
         };
         firebase.initializeApp(firebaseConfig);
-        database = firebase.database();
-        latestData = {};
-        tempUnit = "F";
+        const database = firebase.database();
+        let latestData = {};
+        let tempUnit = "F";
         document.getElementById("degF").style.fontWeight = 'bold';
         function setTemp() {
-            temp = latestData[tempUnit];
+            let temp = latestData[tempUnit];
             document.getElementById("tempDisplay").innerHTML = `${temp} °${tempUnit}`;
             let testTemp = latestData["F"];
+            let text;
             if (testTemp >= 85) {
                 text = "Send help";
-            } else if (testTemp >= 75) {
+            } else if (testTemp >= 73) {
                 text = "He's probably a little toasty";
             } else if (testTemp >= 65) {
                 text = "He's probably feeling good";
